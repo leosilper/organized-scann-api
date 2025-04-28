@@ -6,13 +6,15 @@ A Organized Scann API é uma aplicação backend desenvolvida em Spring Boot 3 p
 
 As motos são organizadas em portais de classificação:
 
-⚙️ Manutenção Rápida
+1- ⚙️ Manutenção Rápida
 
-🚰 Manutenção Demorada
+2- 🚰 Manutenção Demorada
 
-🛳️ Boletins de Ocorrência
+3- 🛳️ Boletins de Ocorrência
 
-🧹 Motos Recuperadas / Carcaças
+4- 🧹 Motos Recuperadas / Carcaças
+
+Obs: Os IDs de cada portal são exatamente nesta ordem acima com ID1,ID2,ID3 E ID4.
 
 Funcionalidades principais:
 
