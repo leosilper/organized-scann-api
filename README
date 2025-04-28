@@ -1,0 +1,222 @@
+📄 Organized Scann API
+
+📋 Sobre o Projeto
+
+A Organized Scann API é uma aplicação backend desenvolvida em Spring Boot 3 para gestão inteligente de motos em pátios de manutenção e recuperação, utilizando identificação via RFID.
+
+As motos são organizadas em portais de classificação:
+
+⚙️ Manutenção Rápida
+
+🚰 Manutenção Demorada
+
+🛳️ Boletins de Ocorrência
+
+🧹 Motos Recuperadas / Carcaças
+
+Funcionalidades principais:
+
+Cadastro de motos associadas a portais.
+
+Consulta paginada e filtrada de motos.
+
+Gerenciamento e resumo dos portais.
+
+Cache para aumentar performance.
+
+Pronto para integração com sistemas IoT e Mobile/Web.
+
+🛠️ Tecnologias Utilizadas
+
+Java 17
+
+Spring Boot 3
+
+Spring Web
+
+Spring Data JPA
+
+Spring Security (configuração básica)
+
+Banco de dados H2 (memória)
+
+Lombok
+
+Cache com Spring Cache
+
+Filtros dinâmicos com Specification
+
+Swagger/OpenAPI (springdoc-openapi)
+
+Spring DevTools (Hot Reload)
+
+⚙️ Como Rodar o Projeto
+
+✅ Pré-requisitos:
+
+Java 17 instalado
+
+Maven 3.8+ instalado
+
+🚀 Rodando localmente:
+
+# Clone o repositório
+git clone https://github.com/leosilper/organized-scann-api.git
+
+# Acesse o diretório do projeto
+cd organized-scann-api
+
+# Rode o projeto
+./mvnw spring-boot:run
+
+🔗 Principais Endpoints
+
+Método
+
+Endpoint
+
+Descrição
+
+GET
+
+/api/motos
+
+Listar motos (com paginação e filtros)
+
+POST
+
+/api/motos
+
+Cadastrar nova moto
+
+GET
+
+/api/motos/{id}
+
+Buscar moto por ID
+
+DELETE
+
+/api/motos/{id}
+
+Deletar moto por ID
+
+GET
+
+/api/portais/resumo
+
+Ver resumo de portais (quantidade de motos)
+
+🔍 Exemplos de Uso no Postman
+
+🚀 1. Listar todas as motos
+
+Método: GET
+
+URL:
+
+http://localhost:8080/api/motos
+
+✅ Retorna todas as motos cadastradas.
+
+🚀 2. Buscar motos por filtros (Placa, RFID, Portal)
+
+Buscar por placa:
+
+http://localhost:8080/api/motos?placa=ABC
+
+Buscar por RFID:
+
+http://localhost:8080/api/motos?rfid=RFID123
+
+Buscar por Portal:
+
+http://localhost:8080/api/motos?portalId=1
+
+Combinação de filtros:
+
+http://localhost:8080/api/motos?placa=ABC&rfid=RFID123&portalId=1
+
+✅ Filtros dinâmicos para consultas mais precisas.
+
+🚀 3. Cadastrar nova moto
+
+Método: POST
+
+URL:
+
+http://localhost:8080/api/motos
+
+Headers:
+
+Content-Type: application/json
+
+Body (JSON):
+
+{
+    "placa": "XYZ9K88",
+    "rfid": "RFID999",
+    "previsaoDisponibilidade": "2025-05-10",
+    "portal": {
+        "id": 2
+    }
+}
+
+✅ Moto criada com sucesso!
+
+🚀 4. Deletar uma moto
+
+Método: DELETE
+
+URL:
+
+http://localhost:8080/api/motos/1
+
+✅ Moto deletada se a resposta for 204 No Content.
+
+🚀 5. Listar resumo dos portais
+
+Método: GET
+
+URL:
+
+http://localhost:8080/api/portais/resumo
+
+✅ Lista todos os portais e suas respectivas quantidades de motos.
+
+📚 Documentação Swagger
+
+Acesse a documentação interativa Swagger:
+
+http://localhost:8080/swagger-ui.html
+
+✅ Permite testar todos os endpoints diretamente do navegador.
+
+📈 Banco de Dados
+
+Banco atual: H2 Database (em memória)
+
+JDBC URL: jdbc:h2:mem:organized_scann
+
+Pode ser adaptado para Oracle, PostgreSQL ou MySQL alterando application.properties.
+
+🧐 Sobre o Projeto
+
+Este sistema foi desenvolvido para:
+
+Controle eficiente de motos em pátios.
+
+Organização automatizada por portais.
+
+Integração futura com RFID e IoT.
+
+Preparação para apps mobile e web.
+
+👥 Grupo Desenvolvedor
+
+Leonardo da Silva Pereira | RM 557598
+
+Bruno da Silva Souza | RM 94346
+
+Julio Samuel de Oliveira | RM 557453
+
