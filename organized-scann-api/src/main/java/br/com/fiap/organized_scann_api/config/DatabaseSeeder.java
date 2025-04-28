@@ -23,23 +23,24 @@ public class DatabaseSeeder {
     @PostConstruct
     public void init() {
         if (portalRepository.count() == 0) {
-            // Creating Portals
+            // Create Portals
             var quickMaintenance = portalRepository.save(new Portal(null, PortalType.QUICK_MAINTENANCE, "Quick Maintenance"));
             var slowMaintenance = portalRepository.save(new Portal(null, PortalType.SLOW_MAINTENANCE, "Slow Maintenance"));
-            var policeReport = portalRepository.save(new Portal(null, PortalType.POLICE_REPORT, "Police Reports"));
-            var recoveredMotorcycle = portalRepository.save(new Portal(null, PortalType.RECOVERED_MOTORCYCLE, "Recovered Motorcycles / Parts"));
+            var policeReport = portalRepository.save(new Portal(null, PortalType.POLICE_REPORT, "Police Report"));
+            var recoveredMotorcycle = portalRepository.save(new Portal(null, PortalType.RECOVERED_MOTORCYCLE, "Recovered Motorcycles"));
 
-            // Creating Example Motorcycles
-            var licensePlates = List.of("ABC1D23", "XYZ9K88", "DEF4G56", "GHI7J89", "LMN5P10");
+            // Create Example Motorcycles
+            var plates = List.of("ABC1D23", "XYZ9K88", "DEF4G56", "GHI7J89", "LMN5P10");
             var rfids = List.of("RFID123", "RFID456", "RFID789", "RFID321", "RFID654");
             var portals = List.of(quickMaintenance, slowMaintenance, policeReport, recoveredMotorcycle);
 
-            for (int i = 0; i < licensePlates.size(); i++) {
+            for (int i = 0; i < plates.size(); i++) {
                 motorcycleRepository.save(Motorcycle.builder()
-                        .licensePlate(licensePlates.get(i))
+                        .licensePlate(plates.get(i))
                         .rfid(rfids.get(i))
-                        .availabilityForecast(LocalDate.now().plusDays(new Random().nextInt(15) + 1))
                         .portal(portals.get(new Random().nextInt(portals.size())))
+                        .entryDate(LocalDate.now().minusDays(new Random().nextInt(10))) // Agora preenchido!
+                        .availabilityForecast(LocalDate.now().plusDays(new Random().nextInt(20) + 1)) // Agora preenchido!
                         .build());
             }
         }
