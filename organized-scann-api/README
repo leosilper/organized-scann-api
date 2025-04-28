@@ -110,89 +110,140 @@ GET
 Ver resumo de portais (quantidade de motos)
 
 🔍 Exemplos de Uso no Postman
-
-🚀 1. Listar todas as motos
-
+🚀 1. Listar todas as motocicletas (GET)
 Método: GET
-
 URL:
 
-http://localhost:8080/api/motos
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles
+No Postman:
 
-✅ Retorna todas as motos cadastradas.
+Crie uma nova requisição GET
 
-🚀 2. Buscar motos por filtros (Placa, RFID, Portal)
+Cole a URL acima
 
-Buscar por placa:
+Clique em Send
 
-http://localhost:8080/api/motos?placa=ABC
+✅ Vai retornar todas as motocicletas cadastradas no banco!
 
-Buscar por RFID:
+🚀 2. Buscar motocicletas por filtros (placa, RFID ou portal) (GET)
+Exemplos de URLs com filtros:
 
-http://localhost:8080/api/motos?rfid=RFID123
+Buscar motocicletas pela placa contendo "ABC":
 
-Buscar por Portal:
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles?licensePlate=ABC
+Buscar motocicletas pelo RFID "RFID123":
 
-http://localhost:8080/api/motos?portalId=1
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles?rfid=RFID123
+Buscar motocicletas por Portal (portalId = 1):
 
-Combinação de filtros:
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles?portalId=1
+Buscar combinando vários filtros:
 
-http://localhost:8080/api/motos?placa=ABC&rfid=RFID123&portalId=1
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles?licensePlate=ABC&rfid=RFID123&portalId=1
+✅ O sistema filtrará os resultados dinamicamente conforme os parâmetros enviados.
 
-✅ Filtros dinâmicos para consultas mais precisas.
-
-🚀 3. Cadastrar nova moto
-
+🚀 3. Cadastrar uma nova motocicleta (POST)
 Método: POST
-
 URL:
 
-http://localhost:8080/api/motos
-
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles
 Headers:
 
+bash
+Copiar
+Editar
 Content-Type: application/json
-
 Body (JSON):
 
+json
+Copiar
+Editar
 {
-    "placa": "XYZ9K88",
+    "licensePlate": "XYZ9K88",
     "rfid": "RFID999",
-    "previsaoDisponibilidade": "2025-05-10",
+    "entryDate": "2025-05-01",
+    "availabilityForecast": "2025-05-10",
     "portal": {
         "id": 2
     }
 }
+No Postman:
 
-✅ Moto criada com sucesso!
+Selecione o método POST
 
-🚀 4. Deletar uma moto
+Na aba Body > raw > JSON
 
+Cole o JSON acima
+
+Clique em Send
+
+✅ A motocicleta será cadastrada no banco de dados!
+
+🚀 4. Deletar uma motocicleta (DELETE)
 Método: DELETE
+URL de exemplo (para deletar a motocicleta com ID = 1):
 
-URL:
+bash
+Copiar
+Editar
+http://localhost:8080/api/motorcycles/1
+No Postman:
 
-http://localhost:8080/api/motos/1
+Selecione o método DELETE
 
-✅ Moto deletada se a resposta for 204 No Content.
+Cole a URL acima
 
-🚀 5. Listar resumo dos portais
+Clique em Send
 
+✅ Se a resposta for 204 No Content, a motocicleta foi apagada com sucesso.
+
+🚀 5. Listar resumo dos portais (GET)
 Método: GET
-
 URL:
 
-http://localhost:8080/api/portais/resumo
+bash
+Copiar
+Editar
+http://localhost:8080/api/portals/summary
+No Postman:
 
-✅ Lista todos os portais e suas respectivas quantidades de motos.
+Crie uma nova requisição GET
+
+Cole a URL acima
+
+Clique em Send
+
+✅ Vai listar todos os portais com o número de motocicletas associadas a cada um.
 
 📚 Documentação Swagger
+Após iniciar o projeto, acesse no navegador:
 
-Acesse a documentação interativa Swagger:
-
+bash
+Copiar
+Editar
 http://localhost:8080/swagger-ui.html
 
-✅ Permite testar todos os endpoints diretamente do navegador.
+✅ Você poderá visualizar e testar a API de forma interativa!
+
+
 
 📈 Banco de Dados
 

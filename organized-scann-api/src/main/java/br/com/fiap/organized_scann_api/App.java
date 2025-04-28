@@ -9,8 +9,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableCaching
 @OpenAPIDefinition(info = @Info(title = "Organized Scann API", version = "1.0", description = "API para gestão de motos por portais de manutenção"))
-public class OrganizedScannApiApplication {
+public class App {
     public static void main(String[] args) {
-        SpringApplication.run(OrganizedScannApiApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 }

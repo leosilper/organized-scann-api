@@ -22,8 +22,8 @@ public class Portal {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private PortalTipo tipo;
+    private PortalType type;
 
     @NotBlank
-    private String nome;
+    private String name;
 }
