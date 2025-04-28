@@ -1,5 +1,22 @@
 package br.com.fiap.organized_scann_api.controller;
 
+import java.net.URI;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.fiap.organized_scann_api.dto.MotoDTO;
 import br.com.fiap.organized_scann_api.model.Moto;
 import br.com.fiap.organized_scann_api.model.Portal;
@@ -9,14 +26,6 @@ import br.com.fiap.organized_scann_api.service.MotoService;
 import br.com.fiap.organized_scann_api.specification.MotoSpecification;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/motos")
@@ -68,6 +77,21 @@ public class MotoController {
         motoService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+public ResponseEntity<Moto> update(@PathVariable Long id, @RequestBody @Valid Moto motoAtualizada) {
+    return motoService.findById(id)
+            .map(motoExistente -> {
+                motoExistente.setPlaca(motoAtualizada.getPlaca());
+                motoExistente.setRfid(motoAtualizada.getRfid());
+                motoExistente.setPrevisaoDisponibilidade(motoAtualizada.getPrevisaoDisponibilidade());
+                motoExistente.setPortal(motoAtualizada.getPortal());
+                Moto motoSalva = motoService.save(motoExistente);
+                return ResponseEntity.ok(motoSalva);
+            })
+            .orElse(ResponseEntity.notFound().build());
+}
+
 
     // 👇 Novo método de conversão seguro
     private MotoDTO toDTO(Moto moto) {
