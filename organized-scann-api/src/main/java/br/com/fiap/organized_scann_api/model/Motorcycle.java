@@ -11,6 +11,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,6 +37,10 @@ public class Motorcycle {
     @ManyToOne
     @NotNull(message = "Portal must be provided")
     private Portal portal; 
+
+    @Size(max = 500, message = "Problem description must be at most 500 characters")
+    private String problemDescription;
+
 
     @NotNull(message = "Entry date is mandatory")
     @PastOrPresent(message = "Entry date must be in the past or present")

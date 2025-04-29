@@ -132,12 +132,14 @@ POST http://localhost:8080/api/motorcycles
 {
   "licensePlate": "XYZ9K88",
   "rfid": "RFID999",
+  "problemDescription": "Routine maintenance required",
   "entryDate": "2025-05-01",
   "availabilityForecast": "2025-05-10",
   "portal": {
     "id": 2
   }
 }
+
 ```
 
 ✅ A motocicleta será cadastrada no banco!
@@ -155,6 +157,7 @@ PUT http://localhost:8080/api/motorcycles/{id}
 {
   "licensePlate": "NEW1234",
   "rfid": "NEW_RFID",
+  "problemDescription": "NEW_DESCRIPTION",
   "entryDate": "2025-05-02",
   "availabilityForecast": "2025-06-01",
   "portal": {

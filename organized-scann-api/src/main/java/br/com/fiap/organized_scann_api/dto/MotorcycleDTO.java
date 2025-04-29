@@ -1,6 +1,7 @@
 package br.com.fiap.organized_scann_api.dto;
 
 import java.time.LocalDate;
+
 import lombok.Data;
 
 @Data
@@ -9,6 +10,7 @@ public class MotorcycleDTO {
     private String licensePlate;
     private String rfid;
     private String portalName;
-    private LocalDate entryDate; // 🔥 Novo campo adicionado
+    private String problemDescription; // 🛠️ Descrição do problema posicionada abaixo do portal
+    private LocalDate entryDate;        // 🔥 Data de entrada
     private LocalDate availabilityForecast;
 }
