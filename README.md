@@ -74,16 +74,52 @@ cd organized-scann-api
 |---------|----------------------------------|-------------------------------------------|
 | GET     | `/api/motorcycles`               | Listar motocicletas (paginado, filtrado)   |
 | POST    | `/api/motorcycles`               | Cadastrar nova motocicleta                |
-| GET     | `/api/motorcycles/{id}`           | Buscar motocicleta por ID                 |
-| PUT     | `/api/motorcycles/{id}`           | Atualizar motocicleta                     |
-| DELETE  | `/api/motorcycles/{id}`           | Deletar motocicleta                       |
-| GET     | `/api/portals/summary`            | Listar resumo dos portais                 |
+| GET     | `/api/motorcycles/{id}`          | Buscar motocicleta por ID                 |
+| PUT     | `/api/motorcycles/{id}`          | Atualizar motocicleta                     |
+| DELETE  | `/api/motorcycles/{id}`          | Deletar motocicleta                       |
+| GET     | `/api/portals/summary`           | Listar resumo dos portais                 |
 
 ---
 
 ## 🔍 Exemplos de Uso no Postman
 
-### 🚀 1. Listar todas as motocicletas
+### 🔐 1. Autenticar e obter Token JWT
+
+```http
+POST http://localhost:8080/auth/login
+```
+
+**Body (JSON):**
+```json
+{
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+```
+
+✅ Retorno esperado:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+Copie o token retornado e use nos próximos endpoints como **Authorization Header**:
+
+**Exemplo de uso no Postman**:
+1. Vá até a aba **Headers**.
+2. Adicione:
+   ```
+   Key: Authorization
+   Value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   ```
+   ⚠️ Atenção: deve começar com `"Bearer "` (com espaço).
+
+   ✅ Agora você estará autenticado para acessar os endpoints protegidos, que estão descrito nos exemplos abaixo!
+
+---
+
+### 🚀 2. Listar todas as motocicletas
 
 ```http
 GET http://localhost:8080/api/motorcycles
@@ -93,7 +129,7 @@ GET http://localhost:8080/api/motorcycles
 
 ---
 
-### 🚀 2. Buscar motocicletas por filtros
+### 🚀 3. Buscar motocicletas por filtros
 
 Buscar por placa:
 
@@ -121,7 +157,7 @@ GET http://localhost:8080/api/motorcycles?licensePlate=ABC&rfid=RFID123&portalId
 
 ---
 
-### 🚀 3. Cadastrar uma nova motocicleta
+### 🚀 4. Cadastrar uma nova motocicleta
 
 ```http
 POST http://localhost:8080/api/motorcycles
@@ -139,14 +175,13 @@ POST http://localhost:8080/api/motorcycles
     "id": 2
   }
 }
-
 ```
 
 ✅ A motocicleta será cadastrada no banco!
 
 ---
 
-### 🚀 4. Atualizar uma motocicleta
+### 🚀 5. Atualizar uma motocicleta
 
 ```http
 PUT http://localhost:8080/api/motorcycles/{id}
@@ -168,7 +203,7 @@ PUT http://localhost:8080/api/motorcycles/{id}
 
 ---
 
-### 🚀 5. Deletar uma motocicleta
+### 🚀 6. Deletar uma motocicleta
 
 ```http
 DELETE http://localhost:8080/api/motorcycles/1
@@ -178,7 +213,7 @@ DELETE http://localhost:8080/api/motorcycles/1
 
 ---
 
-### 🚀 6. Listar resumo dos portais
+### 🚀 7. Listar resumo dos portais
 
 ```http
 GET http://localhost:8080/api/portals/summary
@@ -212,12 +247,7 @@ http://localhost:8080/swagger-ui.html
 ## 👥 Sobre o Grupo
 
 | Nome                        | RM        |
-|------------------------------|-----------|
-| Leonardo da Silva Pereira    | 557598    |
-| Bruno da Silva Souza         | 94346     |
-| Julio Samuel de Oliveira     | 557453    |
-
-
-
----
-
+|-----------------------------|-----------|
+| Leonardo da Silva Pereira   | 557598    |
+| Bruno da Silva Souza        | 94346     |
+| Julio Samuel de Oliveira    | 557453    |
