@@ -26,16 +26,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email is required")
+    @Email(message = "E-mail inválido")
+    @NotBlank(message = "E-mail é obrigatório")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 5, message = "Password must be at least 5 characters long")
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 5, message = "A senha deve ter no mínimo 5 caracteres")
     private String password;
 
-    @NotNull(message = "Role is required")
+    @NotNull(message = "A função (role) é obrigatória")
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

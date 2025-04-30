@@ -11,6 +11,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,25 +29,25 @@ public class Motorcycle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
-    @NotBlank(message = "License plate is mandatory")
+    @NotBlank(message = "Placa é um campo obrigatório")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "A placa não pode conter caracteres especiais")
     private String licensePlate;
 
-    @NotBlank(message = "RFID is mandatory")
+    @NotBlank(message = "RFID é um campo obrigatório")
     private String rfid;
 
     @ManyToOne
-    @NotNull(message = "Portal must be provided")
+    @NotNull(message = "O portal deve ser informado")
     private Portal portal; 
 
-    @Size(max = 500, message = "Problem description must be at most 500 characters")
+    @Size(max = 500, message = "A descrição do problema deve ter no máximo 500 caracteres")
     private String problemDescription;
 
-
-    @NotNull(message = "Entry date is mandatory")
-    @PastOrPresent(message = "Entry date must be in the past or present")
+    @NotNull(message = "A data de entrada é obrigatória")
+    @PastOrPresent(message = "A data de entrada deve estar no passado ou presente")
     private LocalDate entryDate;
 
-    @NotNull(message = "Availability forecast is mandatory")
-    @FutureOrPresent(message = "Availability forecast must be in the present or future")
+    @NotNull(message = "A previsão de disponibilidade é obrigatória")
+    @FutureOrPresent(message = "A previsão de disponibilidade deve estar no presente ou no futuro")
     private LocalDate availabilityForecast;
 }

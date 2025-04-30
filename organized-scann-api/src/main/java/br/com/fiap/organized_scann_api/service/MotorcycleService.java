@@ -26,7 +26,7 @@ public class MotorcycleService {
     public Motorcycle save(Motorcycle motorcycle) {
         if (motorcycle.getPortal() != null && motorcycle.getPortal().getId() != null) {
             Portal portal = portalRepository.findById(motorcycle.getPortal().getId())
-                .orElseThrow(() -> new RuntimeException("Portal not found with ID: " + motorcycle.getPortal().getId()));
+                .orElseThrow(() -> new RuntimeException("Portal não encontrado com ID: " + motorcycle.getPortal().getId()));
             motorcycle.setPortal(portal);
         }
         return motorcycleRepository.save(motorcycle);

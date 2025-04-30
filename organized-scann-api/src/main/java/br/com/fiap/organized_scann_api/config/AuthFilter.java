@@ -35,7 +35,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
         if (header == null || !header.startsWith("Bearer ")) {
             System.out.println("🚫 Header Authorization inválido ou ausente");
-            filterChain.doFilter(request, response); // Continua sem autenticar
+            filterChain.doFilter(request, response);
             return;
         }
 
@@ -59,7 +59,7 @@ public class AuthFilter extends OncePerRequestFilter {
             System.out.println("❌ Erro ao validar token: " + e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("""
-                { "message": "Invalid or expired token" }
+                { "message": "Token inválido ou expirado" }
             """);
             return;
         }

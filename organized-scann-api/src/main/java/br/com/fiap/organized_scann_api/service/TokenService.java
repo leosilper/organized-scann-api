@@ -16,7 +16,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 public class TokenService {
 
     private static final Long DURATION = 10L; // duração do token em minutos
-    private static final Algorithm ALG = Algorithm.HMAC256("secret"); // TODO: usar uma chave secreta segura
+    private static final Algorithm ALG = Algorithm.HMAC256("secret"); // chave secreta para assinar o token
 
     public Token createToken(User user) {
         String token = JWT.create()
