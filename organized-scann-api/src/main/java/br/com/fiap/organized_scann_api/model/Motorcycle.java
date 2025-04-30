@@ -40,8 +40,9 @@ public class Motorcycle {
     @NotNull(message = "O portal deve ser informado")
     private Portal portal; 
 
-    @Size(max = 500, message = "A descrição do problema deve ter no máximo 500 caracteres")
+    @Size(min = 10, max = 500, message = "A descrição do problema deve ter entre 10 e 500 caracteres")
     private String problemDescription;
+
 
     @NotNull(message = "A data de entrada é obrigatória")
     @PastOrPresent(message = "A data de entrada deve estar no passado ou presente")
