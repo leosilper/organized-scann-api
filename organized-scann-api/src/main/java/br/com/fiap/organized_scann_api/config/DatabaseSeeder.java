@@ -62,7 +62,7 @@ public class DatabaseSeeder {
             var plates = List.of("ABC1D23", "XYZ9K88", "DEF4G56", "GHI7J89", "LMN5P10");
             var rfids = List.of("RFID123", "RFID456", "RFID789", "RFID321", "RFID654");
             var problems = List.of(
-                "Flat tire",
+                "Battery not charging",
                 "Electrical issue",
                 "Stolen and recovered",
                 "Engine overheating",
