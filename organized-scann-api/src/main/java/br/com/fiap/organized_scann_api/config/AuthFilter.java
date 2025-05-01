@@ -1,6 +1,7 @@
 package br.com.fiap.organized_scann_api.config;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -21,6 +22,24 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenService tokenService;
+
+    // Lista de rotas públicas que não devem passar pelo filtro
+    private static final List<String> EXCLUDED_PATHS = List.of(
+        "/swagger-ui",
+        "/swagger-ui/",
+        "/swagger-ui.html",
+        "/v3/api-docs",
+        "/v3/api-docs/",
+        "/v3/api-docs/swagger-config",
+        "/auth/login",
+        "/h2-console"
+    );
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return EXCLUDED_PATHS.stream().anyMatch(path::startsWith);
+    }
 
     @Override
     protected void doFilterInternal(
@@ -58,6 +77,7 @@ public class AuthFilter extends OncePerRequestFilter {
         } catch (Exception e) {
             System.out.println("❌ Erro ao validar token: " + e.getMessage());
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
             response.getWriter().write("""
                 { "message": "Token inválido ou expirado" }
             """);
