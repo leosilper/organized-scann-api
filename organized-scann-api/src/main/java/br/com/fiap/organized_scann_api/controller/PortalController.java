@@ -25,11 +25,22 @@ public class PortalController {
         return portalRepository.findAll().stream().map(portal -> {
             PortalSummaryDTO dto = new PortalSummaryDTO();
             dto.setPortalName(portal.getName());
+
             var motorcycles = motorcycleRepository.findAll().stream()
-                    .filter(m -> m.getPortal().getId().equals(portal.getId()))
-                    .collect(Collectors.toList());
+                .filter(m -> m.getPortal() != null && m.getPortal().getId().equals(portal.getId()))
+                .collect(Collectors.toList());
+
             dto.setMotorcycleCount(motorcycles.size());
-            dto.setMotorcyclePlates(motorcycles.stream().map(m -> m.getLicensePlate()).collect(Collectors.toList()));
+            dto.setMotorcyclePlates(motorcycles.stream()
+                .map(m -> m.getLicensePlate())
+                .collect(Collectors.toList()));
+            dto.setMotorcycleRfids(motorcycles.stream()
+                .map(m -> m.getRfid())
+                .collect(Collectors.toList()));
+            dto.setMotorcycleChassis(motorcycles.stream()
+                .map(m -> m.getChassis())
+                .collect(Collectors.toList()));
+
             return dto;
         }).collect(Collectors.toList());
     }
