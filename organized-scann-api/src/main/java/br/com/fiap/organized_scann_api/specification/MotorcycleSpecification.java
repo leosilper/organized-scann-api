@@ -21,4 +21,19 @@ public class MotorcycleSpecification {
         return (root, query, builder) -> 
             portal == null ? null : builder.equal(root.get("portal"), portal);
     }
+
+    public static Specification<Motorcycle> hasType(String type) {
+        return (root, query, builder) -> 
+            type == null ? null : builder.like(builder.lower(root.get("type")), "%" + type.toLowerCase() + "%");
+    }
+
+    public static Specification<Motorcycle> hasBranch(String branch) {
+        return (root, query, builder) -> 
+            branch == null ? null : builder.like(builder.lower(root.get("branch")), "%" + branch.toLowerCase() + "%");
+    }
+
+    public static Specification<Motorcycle> hasChassis(String chassis) {
+        return (root, query, builder) -> 
+            chassis == null ? null : builder.like(builder.lower(root.get("chassis")), "%" + chassis.toLowerCase() + "%");
+    }
 }
