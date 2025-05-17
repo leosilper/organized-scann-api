@@ -13,7 +13,15 @@ As motocicletas são organizadas em portais de classificação:
 | 3  | 🚓 Boletins de Ocorrência        | Casos de polícia                        |
 | 4  | 🧹 Motos Recuperadas / Carcaças  | Motos recuperadas ou sucata              |
 
-> ❗ **Observação**: Os IDs dos portais seguem esta ordem exata.
+> ❗ **Observação**: Os IDs dos portais seguem esta ordem de numeração exata.
+
+Além disso, cada motocicleta agora pode ser classificada por tipo:
+
+| Tipo                | Descrição                   |
+|---------------------|-----------------------------|
+| MOTTU_SPORT_110I    | Honda Sport 110i da Mottu   |
+| MOTTU_E             | Mottu Elétrica              |
+| MOTTU_POP           | Honda Pop da Mottu          |
 
 ---
 
@@ -113,9 +121,9 @@ Copie o token retornado e use nos próximos endpoints como **Authorization Heade
    Key: Authorization
    Value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    ```
-   ⚠️ Atenção: deve começar com `"Bearer "` (com espaço).
+   ⚠️ Atenção: deve começar com "Bearer " (com espaço).
 
-   ✅ Agora você estará autenticado para acessar os endpoints protegidos, que estão descrito nos exemplos abaixo!
+✅ Agora você estará autenticado para acessar os endpoints protegidos, que estão descrito nos exemplos abaixo!
 
 ---
 
@@ -149,10 +157,16 @@ Buscar por portal:
 GET http://localhost:8080/api/motorcycles?portalId=1
 ```
 
+Buscar por tipo de motocicleta:
+
+```http
+GET http://localhost:8080/api/motorcycles?type=MOTTU_E
+```
+
 Buscar combinando filtros:
 
 ```http
-GET http://localhost:8080/api/motorcycles?licensePlate=ABC&rfid=RFID123&portalId=1
+GET http://localhost:8080/api/motorcycles?licensePlate=ABC1D23&rfid=RFID123&portalId=1&type=MOTTU_SPORT_110I
 ```
 
 ---
@@ -166,15 +180,21 @@ POST http://localhost:8080/api/motorcycles
 **Body (JSON):**
 ```json
 {
+ "branch": "Ipiranga (Zona Sul)",
+  "type": "MOTTU_E",
   "licensePlate": "XYZ9K88",
+  "chassis": "9C2KC1670FR123456",
   "rfid": "RFID999",
+  "portalName": "Manutenção Demorada",
   "problemDescription": "Routine maintenance required",
   "entryDate": "2025-05-01",
-  "availabilityForecast": "2025-05-10",
+  "availabilityForecast": "2025-06-10",
   "portal": {
     "id": 2
   }
 }
+
+
 ```
 
 ✅ A motocicleta será cadastrada no banco!
@@ -190,15 +210,21 @@ PUT http://localhost:8080/api/motorcycles/{id}
 **Body (JSON):**
 ```json
 {
-  "licensePlate": "NEW1234",
-  "rfid": "NEW_RFID",
-  "problemDescription": "NEW_DESCRIPTION",
-  "entryDate": "2025-05-02",
-  "availabilityForecast": "2025-06-01",
+  "branch": "",                  // Ex: "Mottu Rio de Janeiro - Centro"
+  "type": "",                    // Ex: "MOTTU_E" ou "MOTTU_POP"
+  "licensePlate": "",            // Ex: "XYZ9K88"
+  "chassis": "",                 // Ex: "9C2KC1670FR123456"
+  "rfid": "",                    // Ex: "RFID999"
+  "portalName": "",              // Ex: "Manutenção Demorada"
+  "problemDescription": "",      // Ex: "Routine maintenance required"
+  "entryDate": "",               // Ex: "2025-05-01" (formato: yyyy-MM-dd)
+  "availabilityForecast": "",    // Ex: "2025-06-10" (formato: yyyy-MM-dd)
   "portal": {
-    "id": 3
+    "id": 0                      // Ex: 2 (ID do portal existente)
   }
 }
+
+
 ```
 
 ---
