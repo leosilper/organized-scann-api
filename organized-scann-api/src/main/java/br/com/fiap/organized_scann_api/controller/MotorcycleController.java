@@ -48,6 +48,9 @@ public class MotorcycleController {
             @RequestParam(required = false) String licensePlate,
             @RequestParam(required = false) String rfid,
             @RequestParam(required = false) Long portalId,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String branch,    // Novo filtro branch
+            @RequestParam(required = false) String chassis,   // Novo filtro chassis
             Pageable pageable
     ) {
         Portal portal = null;
@@ -57,8 +60,11 @@ public class MotorcycleController {
 
         Specification<Motorcycle> spec = Specification.where(
                 MotorcycleSpecification.hasLicensePlate(licensePlate)
-                        .and(MotorcycleSpecification.hasRfid(rfid))
-                        .and(MotorcycleSpecification.hasPortal(portal))
+                    .and(MotorcycleSpecification.hasRfid(rfid))
+                    .and(MotorcycleSpecification.hasPortal(portal))
+                    .and(MotorcycleSpecification.hasType(type))
+                    .and(MotorcycleSpecification.hasBranch(branch))
+                    .and(MotorcycleSpecification.hasChassis(chassis))
         );
 
         return motorcycleRepository.findAll(spec, pageable)
@@ -82,6 +88,9 @@ public class MotorcycleController {
                     existingMotorcycle.setAvailabilityForecast(updatedMotorcycle.getAvailabilityForecast());
                     existingMotorcycle.setPortal(updatedMotorcycle.getPortal());
                     existingMotorcycle.setProblemDescription(updatedMotorcycle.getProblemDescription());
+                    existingMotorcycle.setType(updatedMotorcycle.getType());
+                    existingMotorcycle.setBranch(updatedMotorcycle.getBranch());
+                    existingMotorcycle.setChassis(updatedMotorcycle.getChassis());
                     Motorcycle savedMotorcycle = motorcycleService.save(existingMotorcycle);
                     return ResponseEntity.ok(savedMotorcycle);
                 })
@@ -97,13 +106,15 @@ public class MotorcycleController {
     private MotorcycleDTO toDTO(Motorcycle motorcycle) {
         MotorcycleDTO dto = new MotorcycleDTO();
         dto.setId(motorcycle.getId());
+        dto.setBranch(motorcycle.getBranch());
+        dto.setType(motorcycle.getType());
         dto.setLicensePlate(motorcycle.getLicensePlate());
+        dto.setChassis(motorcycle.getChassis());
         dto.setRfid(motorcycle.getRfid());
         dto.setPortalName(motorcycle.getPortal() != null ? motorcycle.getPortal().getName() : null);
-        dto.setProblemDescription(motorcycle.getProblemDescription()); 
+        dto.setProblemDescription(motorcycle.getProblemDescription());
         dto.setEntryDate(motorcycle.getEntryDate());
         dto.setAvailabilityForecast(motorcycle.getAvailabilityForecast());
-        
         return dto;
     }
 }
