@@ -270,6 +270,24 @@ http://localhost:8080/swagger-ui.html
 
 ---
 
+## 🏆 Diferenciais Técnicos da API
+
+Além de atender a todos os requisitos obrigatórios do Challenge, esta API foi aprimorada com recursos adicionais que a tornam mais robusta, escalável e pronta para produção.
+
+| 🔧 Recurso                         | 💡 Valor Agregado |
+|-----------------------------------|-------------------|
+| **Autenticação JWT**              | Implementa segurança real de API com controle de acesso baseado em tokens. |
+| **Filtros com Specification JPA** | Permite buscas dinâmicas e flexíveis com múltiplos parâmetros combináveis. |
+| **Arquitetura Limpa (MVC)**       | Código organizado em camadas (`controller`, `service`, `repository`, etc.), facilitando manutenção e testes. |
+| **Uso de DTOs**                   | Garante segurança e clareza nos dados trafegados entre cliente e servidor. |
+| **Handler Global de Exceções**    | Oferece respostas padronizadas e amigáveis para erros, seguindo boas práticas REST. |
+| **Seeders de Banco de Dados**     | Popula dados automaticamente para testes e apresentações rápidas do sistema. |
+| **Configuração de CORS**          | Permite integração segura com aplicações frontend hospedadas em domínios diferentes. |
+
+> ✅ Todos esses recursos foram adicionados com foco em qualidade de código, experiência do usuário e preparação para ambientes reais de produção.
+
+---
+
 ## 👥 Sobre o Grupo
 
 | Nome                        | RM        |
